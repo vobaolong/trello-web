@@ -33,7 +33,7 @@ function Profile() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar
-              sx={{ width: 30, height: 30 }}
+              sx={{ width: 34, height: 34 }}
               src='https://s2.coinmarketcap.com/static/img/coins/200x200/10269.png'
             />
           </IconButton>

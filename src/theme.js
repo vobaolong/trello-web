@@ -61,6 +61,26 @@ const theme = extendTheme({
           }
         })
       }
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          '*::-webkit-scrollbar': {
+            with: '8px',
+            height: '8px'
+          },
+          '*::-webkit-scrollbar-thumb': {
+            backgroundColor: '#bdc3c7',
+            borderRadius: '8px',
+            display: 'none'
+          },
+          '*::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '',
+            borderRadius: '8px',
+            display: 'block'
+          }
+        }
+      }
     }
   }
 })
