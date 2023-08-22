@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import Profile from './Menus/Profile'
 import { useColorScheme } from '@mui/material'
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd'
 
 function AppBar() {
   const { mode } = useColorScheme()
@@ -29,36 +30,50 @@ function AppBar() {
           width: '100%',
           height: (theme) => theme.trello.appBarHeight,
           display: 'flex',
+          cursor: 'pointer',
           alignItems: 'center',
+          backgroundColor: 'background.default',
           justifyContent: 'space-between',
-          backgroundColor: 'background.default'
+          gap: 2,
+          overflowX: 'auto'
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box
+          sx={{
+            gap: 2,
+            display: 'flex',
+            cursor: 'pointer',
+            alignItems: 'center'
+          }}
+        >
           <AppsIcon sx={{ color: 'primary.main' }} />
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <SvgIcon
               fontSize='small'
-              sx={{ color: 'primary.main' }}
-              component={TrelloIcon}
               inheritViewBox
+              component={TrelloIcon}
+              sx={{ color: 'primary.main' }}
             />
             <Typography
               variant='span'
               sx={{
-                color: 'primary.main',
+                fontWeight: 'bold',
                 fontSize: '1.2rem',
-                fontWeight: 'bold'
+                color: 'primary.main'
               }}
             >
               Trello
             </Typography>
           </Box>
-          <WorkSpaces />
-          <Recent />
-          <Started />
-          <Template />
-          <Button variant={buttonVariant}>create</Button>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
+            <WorkSpaces />
+            <Recent />
+            <Started />
+            <Template />
+            <Button startIcon={<LibraryAddIcon />} variant={buttonVariant}>
+              create
+            </Button>
+          </Box>
         </Box>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -67,6 +82,7 @@ function AppBar() {
             label='Search...'
             type='search'
             size='small'
+            sx={{ minWidth: 120 }}
           />
           <ModeSelect />
           <Tooltip title='Notifications'>
