@@ -1,4 +1,4 @@
-import './App.css'
+import { useColorScheme } from '@mui/material'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -7,7 +7,6 @@ import Box from '@mui/material/Box'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
-import { useColorScheme } from '@mui/material'
 import Container from '@mui/material/Container'
 
 function ModeSelect() {
