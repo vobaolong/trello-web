@@ -36,6 +36,13 @@ const theme = extendTheme({
     // }
   },
   components: {
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          textTransform: 'capitalize'
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {

@@ -8,7 +8,6 @@ import FilterList from '@mui/icons-material/FilterList'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
-import { useColorScheme } from '@mui/material'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
@@ -23,7 +22,7 @@ const MENU_STYLES = {
   },
   '&:hover': { bgcolor: 'primary.50' }
 }
-function BoardBar() {
+function BoardBar({ board }) {
   return (
     <>
       <Box
@@ -57,14 +56,14 @@ function BoardBar() {
             onClick={() => {}}
             clickable
             icon={<DashboardIcon />}
-            label='Board of Director'
+            label={board?.title}
           />
           <Chip
             sx={MENU_STYLES}
             onClick={() => {}}
             clickable
             icon={<VpnLockIcon />}
-            label='Public/Private Workspace'
+            label={board?.type}
           />
           <Chip
             sx={MENU_STYLES}

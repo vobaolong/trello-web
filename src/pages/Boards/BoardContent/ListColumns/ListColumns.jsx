@@ -2,7 +2,8 @@ import Box from '@mui/material/Box'
 import Column from './Column/Column'
 import Button from '@mui/material/Button'
 import PostAddIcon from '@mui/icons-material/PostAdd'
-function ListColumns() {
+
+function ListColumns({ columns }) {
   return (
     <>
       <Box
@@ -18,10 +19,9 @@ function ListColumns() {
           }
         }}
       >
-        {/* Box Column 1*/}
-        <Column />
-        <Column />
-        <Column />
+        {columns?.map((column) => (
+          <Column key={column._id} column={column} />
+        ))}
         <Box
           sx={{
             minWidth: '180px',
