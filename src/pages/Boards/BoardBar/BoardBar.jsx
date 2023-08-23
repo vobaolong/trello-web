@@ -24,8 +24,6 @@ const MENU_STYLES = {
   '&:hover': { bgcolor: 'primary.50' }
 }
 function BoardBar() {
-  const { mode } = useColorScheme()
-  const buttonVariant = mode === 'light' ? 'outlined' : 'contained'
   return (
     <>
       <Box
@@ -41,7 +39,9 @@ function BoardBar() {
           overflowX: 'auto',
           bgcolor: (theme) =>
             theme.palette.mode === 'dark' ? '#34495e' : '#1976d2',
-          borderBottom: '1px solid white'
+          '&::-webkit-scrollbar-track': {
+            m: 2
+          }
         }}
       >
         <Box
@@ -98,7 +98,7 @@ function BoardBar() {
           }}
         >
           <Button
-            variant={buttonVariant}
+            variant='outlined'
             startIcon={<PersonAddIcon />}
             sx={{
               color: 'white',
@@ -116,7 +116,9 @@ function BoardBar() {
                 width: 34,
                 height: 34,
                 fontSize: 16,
-                border: 'none'
+                border: 'none',
+                color: 'white',
+                '&:first-of-type': { bgcolor: '#a4b0be' }
               }
             }}
           >
