@@ -23,12 +23,20 @@ import { CSS } from '@dnd-kit/utilities'
 
 function Column({ column }) {
   // dnd-kit
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: column._id, data: { ...column } })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: column._id, data: { ...column } })
   const dndKitColumnStyles = {
     touchAction: 'none',
     transform: CSS.Translate.toString(transform),
-    transition
+    transition,
+    height: '100%',
+    opacity: isDragging ? 0.5 : undefined
   }
 
   const [anchorEl, setAnchorEl] = useState(null)
@@ -42,7 +50,7 @@ function Column({ column }) {
 
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
   return (
-    <>
+    <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
       <Box
         sx={{
           minWidth: '300px',
@@ -55,9 +63,6 @@ function Column({ column }) {
           maxHeight: (theme) =>
             `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}
-        ref={setNodeRef}
-        style={dndKitColumnStyles}
-        {...attributes}
         {...listeners}
       >
         {/* Header */}
@@ -155,7 +160,7 @@ function Column({ column }) {
           </Tooltip>
         </Box>
       </Box>
-    </>
+    </div>
   )
 }
 
