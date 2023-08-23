@@ -18,8 +18,19 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import Button from '@mui/material/Button'
 import ListCards from './ListCards/ListCards'
 import { mapOrder } from '@/utils/sorts'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 function Column({ column }) {
+  // dnd-kit
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: column._id, data: { ...column } })
+  const dndKitColumnStyles = {
+    touchAction: 'none',
+    transform: CSS.Translate.toString(transform),
+    transition
+  }
+
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -44,6 +55,10 @@ function Column({ column }) {
           maxHeight: (theme) =>
             `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}
+        ref={setNodeRef}
+        style={dndKitColumnStyles}
+        {...attributes}
+        {...listeners}
       >
         {/* Header */}
         <Box
