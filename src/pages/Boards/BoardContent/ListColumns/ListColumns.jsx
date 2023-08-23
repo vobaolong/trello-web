@@ -8,6 +8,7 @@ import {
 } from '@dnd-kit/sortable'
 
 function ListColumns({ columns }) {
+  //
   return (
     <SortableContext
       items={columns?.map((column) => column._id)}
