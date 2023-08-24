@@ -24,7 +24,7 @@ function Card({ card }) {
     transform: CSS.Translate.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : undefined,
-    border: isDragging ? '1.2px dashed #7f8c8d' : ''
+    border: isDragging ? '1.2px dashed #7f8c8d' : undefined
   }
 
   const shouldShowCardActions = () => {
