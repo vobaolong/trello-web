@@ -13,9 +13,7 @@ import {
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  rectIntersection,
-  getFirstCollision,
-  closestCenter
+  getFirstCollision
 } from '@dnd-kit/core'
 import { arrayMove } from '@dnd-kit/sortable'
 import Column from './ListColumns/Column/Column'
@@ -275,18 +273,25 @@ function BoardContent({ board }) {
       if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
         return closestCorners({ ...args })
       }
+
+      // tìm các điểm giao nhau
       const pointerIntersection = pointerWithin(args)
-      const intersection = !!pointerIntersection?.length
-        ? pointerIntersection
-        : rectIntersection(args)
-      // tìm overId đầu tiên trong đám intersaction
-      let overId = getFirstCollision(intersection, 'id')
+      // nếu pointerIntersection là mảng rỗng thì return
+      if (!pointerIntersection?.length) return
+
+      // thuật toán phát hiện va chạm sẽ trả về 1 mảng các va chạm ở đây
+      // const intersection = !!pointerIntersection?.length
+      //   ? pointerIntersection
+      //   : rectIntersection(args)
+
+      // tìm overId đầu tiên trong đám pointerIntersection
+      let overId = getFirstCollision(pointerIntersection, 'id')
       if (overId) {
         const intersectColumn = orderedColumns.find(
           (column) => column._id === overId
         )
         if (intersectColumn) {
-          overId = closestCenter({
+          overId = closestCorners({
             ...args,
             droppableContainers: args.droppableContainers.filter(
               (container) => {
