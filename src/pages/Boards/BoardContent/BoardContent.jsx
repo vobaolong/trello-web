@@ -18,7 +18,8 @@ import {
 import { arrayMove } from '@dnd-kit/sortable'
 import Column from './ListColumns/Column/Column'
 import Card from './ListColumns/Column/ListCards/Card/Card'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
+import { generatePlaceholderCard } from '@/utils/formater'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
@@ -97,11 +98,16 @@ function BoardContent({ board }) {
         nextActiveColumn.cards = nextActiveColumn.cards.filter(
           (card) => card._id !== activeDraggingCardId
         )
+        // thêm PlaceholderCard nếu column rỗng
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaceholderCard(nextActiveColumn)]
+        }
         // update lại mảng cardOrderIds cho chuẩn data
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(
           (card) => card._id
         )
       }
+
       if (nextOverColumn) {
         // check card dragging có tồn tại ở overColumn hay chưa, nếu có thì xoá trước khi thả
         nextOverColumn.cards = nextOverColumn.cards.filter(
@@ -113,10 +119,13 @@ function BoardContent({ board }) {
           0,
           activeDraggingCardData
         )
-        // update lại mảng cardOrderIds cho chuẩn data
-        nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
-          (card) => card._id
+        // xoá placeholderCard đi nếu nó đang tồn tại
+        nextOverColumn.cards = nextOverColumn.cards.filter(
+          (card) => !card.FE_PlaceholderCard
         )
+        // update lại mảng cardOrderIds cho chuẩn data
+        nextOverColumn.cards.nextOverColumn.cardOrderIds =
+          nextOverColumn.cards.map((card) => card._id)
       }
 
       return nextColumns
